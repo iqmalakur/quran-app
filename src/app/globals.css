@@ -30,4 +30,9 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  .tab-header {
+    @apply px-6 py-3 text-[16px] text-emerald-600;
+  }
+
 }
