@@ -13,6 +13,14 @@ export default async function Surah({ params }){
                 <span className="block mx-32 mb-3 text-center text-sm text-slate-400">{surah.description}</span>
             </div>
             <div className="mb-28 px-28">
+                {/* Don't start with bismillah for Al-Fatihah and At-Tawbah */}
+                {number === '1' || number === '9' ? '' :
+                    <Ayah
+                        number={0}
+                        arab={surah.bismillah.arab}
+                        translation={surah.bismillah.translation}
+                    />
+                }
                 {surah.ayahs.map(ayah =>
                     <Ayah
                         key={ayah.number.inQuran}
