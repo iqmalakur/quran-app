@@ -1,62 +1,54 @@
 import Image from "next/image";
+import getAllSurah from "@/util/getAllSurah";
 
-export default function Home() {
+export default async function Home() {
+
+  const surahs = await getAllSurah();
+
   return (
 
 
       <div className="relative px-40 py-20 min-h-screen">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-400">
+          <thead className="text-xs  uppercase  bg-gray-700 text-gray-400">
           <tr>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="tab-header w-0">
+              No.
+            </th>
+            <th scope="col" className="tab-header">
               Nama Surah
             </th>
 
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="tab-header">
               Kategori
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="tab-header">
               Ayat
             </th>
           </tr>
           </thead>
           <tbody>
-          <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              Al-Fatihah
-            </th>
-
-            <td className="px-6 py-4">
-              Makiyyah
-            </td>
-            <td className="px-6 py-4">
-              7 Ayat
-            </td>
-          </tr>
-          <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              Al-Baqarah
-            </th>
-
-            <td className="px-6 py-4">
-              Madaniyyah
-            </td>
-            <td className="px-6 py-4">
-              286 Ayat
-            </td>
-          </tr>
-          <tr className="bg-white dark:bg-gray-800">
-            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              Ali Imran
-            </th>
-
-            <td className="px-6 py-4">
-              Madaniyyah
-            </td>
-            <td className="px-6 py-4">
-              200 Ayat
-            </td>
-          </tr>
+          {surahs.map((surah) => (
+              <tr key={surah.number} className=" border-b bg-gray-800 border-gray-700">
+                <th scope="row" className="px-6 py-4 font-medium  whitespace-nowrap text-white w-0">
+                  {surah.number}.
+                </th>
+                <th scope="row" className="px-6 py-4 font-medium  whitespace-nowrap text-white">
+                  <span className="block text-lg">
+                    {surah.name}
+                  </span>
+                  <span className="block text-green-600">
+                    ({surah.translation})
+                  </span>
+                </th>
+                <td className="px-6 py-4">
+                  {surah.revelation}
+                </td>
+                <td className="px-6 py-4">
+                  {surah.numberOfAyahs} Ayat
+                </td>
+              </tr>
+          ))}
           </tbody>
         </table>
       </div>
