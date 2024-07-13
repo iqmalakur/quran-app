@@ -2,6 +2,7 @@
 import getAllSurah from "@/util/getAllSurah";
 import {useEffect, useState} from "react";
 import {useDebounce} from "use-debounce";
+import Link from "next/link";
 
 export default function Table({keyword}) {
     const [surahs, setSurahs] = useState([]);
@@ -35,8 +36,13 @@ export default function Table({keyword}) {
             </thead>
             <tbody>
             {surahs.map((surah) => (
-                <tr key={surah.number} className=" border-b bg-gray-800 border-gray-700">
-                    <th scope="row" className="px-6 py-4 font-medium  whitespace-nowrap text-white w-0">
+                <tr
+                    key={surah.number}
+                    className=" border-b bg-gray-800 border-gray-700"
+                    onMouseDown={() => window.location.href = `/surah/${surah.number}`}
+                    style={{ cursor: 'pointer' }}>
+
+                    <th scope="row" className="px-6 py-4 font-medium  whitespace-nowrap text-white w-0" >
                         {surah.number}.
                     </th>
                     <th scope="row" className="px-6 py-4 font-medium  whitespace-nowrap text-white">
